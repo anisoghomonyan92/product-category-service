@@ -17,5 +17,5 @@ public interface ProductMapper {
 
     List<ProductResponseDto> map(List<Product> productList);
 
-   Product map(UpdateProduct updateProduct);
+   Product map(UpdateProduct updateProductDto);
 }

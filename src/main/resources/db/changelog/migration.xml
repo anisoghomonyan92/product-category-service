@@ -7,9 +7,9 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="asoghomonyan" id="initdb">
-        <!--        City entity-->
-        <createTable tableName="category" >
+    <changeSet author="asoghomonyan" id="indb">
+        <!--        Category entity-->
+        <createTable tableName="category">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -17,8 +17,8 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <createTable tableName="product" >
+        <!--        Product entity-->
+        <createTable tableName="product">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -34,7 +34,30 @@
             <column name="category_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+        <!--        User entity-->
+        <createTable tableName="user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="ENUM('USER','ADMIN')" defaultValue='USER'>
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <addForeignKeyConstraint
                 baseColumnNames="category_id"
@@ -42,5 +65,14 @@
                 constraintName="fk_product_category_id"
                 referencedTableName="category"
                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="product"
+                constraintName="fk_product_user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"/>
+
     </changeSet>
+
+
 </databaseChangeLog>

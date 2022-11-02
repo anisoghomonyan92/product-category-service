@@ -20,31 +20,31 @@ public class CategoryEndpoint {
     private final CategoryMapper categoryMapper;
 
     @GetMapping
-    public List<CategoryResponseDto> getAllAuthors(){
+    public List<CategoryResponseDto> getAllAuthors() {
         return categoryMapper.map(categoryService.findAll());
     }
 
     @GetMapping("/{id}")
-    public CategoryResponseDto getCategoryById(@PathVariable("id") int id){
+    public CategoryResponseDto getCategoryById(@PathVariable("id") int id) {
         Category category = categoryService.findById(id);
         return categoryMapper.map(category);
     }
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody CreateCategoryDto createCategoryDto){
-        Category sevedCategory=categoryService.save(categoryMapper.map(createCategoryDto));
+    public ResponseEntity<Category> createCategory(@RequestBody CreateCategoryDto createCategoryDto) {
+        Category sevedCategory = categoryService.save(categoryMapper.map(createCategoryDto));
         return ResponseEntity.ok(sevedCategory);
     }
 
 
     @PutMapping
-    public ResponseEntity<Category> updateCategory(@RequestBody UpdateCategory updateCategory){
-        Category editCategory=categoryService.update(categoryMapper.map(updateCategory));
+    public ResponseEntity<Category> updateCategory(@RequestBody UpdateCategory updateCategory) {
+        Category editCategory = categoryService.update(categoryMapper.map(updateCategory));
         return ResponseEntity.ok(editCategory);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Category> deleteCategory(@PathVariable("id") int id){
+    public ResponseEntity<Category> deleteCategory(@PathVariable("id") int id) {
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
 

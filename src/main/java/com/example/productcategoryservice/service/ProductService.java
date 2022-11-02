@@ -3,6 +3,7 @@ package com.example.productcategoryservice.service;
 import com.example.productcategoryservice.model.Category;
 import com.example.productcategoryservice.model.Product;
 import com.example.productcategoryservice.repository.ProductRepository;
+import com.example.productcategoryservice.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,23 +26,27 @@ public class ProductService {
         return byId.orElse(null);
     }
 
-    public Product save(Product map) {
-        return productRepository.save(map);
-    }
-
-    public Product update(Product map) {
-        if (map.getId() == 0) {
-            ResponseEntity.badRequest().build();
-        }
-        return productRepository.save(map);
-    }
-
-    public void delete(int id) {
-        productRepository.deleteById(id);
+    public Product save(Product product) {
+        return productRepository.save(product);
     }
 
     public List<Product> findByCategoryId(Category category) {
         return productRepository.findAllByCategory(category);
     }
 
+    public void deleteById(int id, CurrentUser currentUser) {
+        Optional<Product> byId = productRepository.findById(id);
+        if (byId.isPresent() && currentUser.getUser().getId() == byId.get().getUser().getId()) {
+            productRepository.deleteById(id);
+        }
+        ResponseEntity.notFound().build();
+    }
+
+    public Optional<Product> findProductById(int id) {
+        return productRepository.findById(id);
+    }
+
+    public Product update(Product product) {
+        return productRepository.save(product);
+    }
 }

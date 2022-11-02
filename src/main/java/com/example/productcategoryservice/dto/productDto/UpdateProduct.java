@@ -14,4 +14,5 @@ public class UpdateProduct {
     private int caunt;
     private double price;
     private Category category;
+
 }

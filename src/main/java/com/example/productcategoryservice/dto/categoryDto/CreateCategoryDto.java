@@ -1,5 +1,6 @@
 package com.example.productcategoryservice.dto.categoryDto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,4 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateCategoryDto {
     private String name;
+
 }

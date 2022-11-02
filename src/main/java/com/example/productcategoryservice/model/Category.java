@@ -17,4 +17,5 @@ public class Category {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int Id;
     private String name;
+
 }

@@ -4,5 +4,12 @@ spring:
     username: root
     password: rootroot
 
+
   liquibase:
     change-log: classpath:/db/changelog/migration.xml
+
+jwt:
+  secret: kscfadcad@29
+  expiration: 330000
+
+
